@@ -8,7 +8,7 @@ CREATE OR REPLACE
 ALGORITHM=UNDEFINED
 DEFINER = 'root'@'localhost'
 SQL SECURITY INVOKER
-VIEW `v$db_checks`
+VIEW sys.`v$db_checks`
 AS
 SELECT 'Connection' AS category
       ,'Refued Connection' AS division
