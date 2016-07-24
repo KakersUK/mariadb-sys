@@ -1,5 +1,5 @@
 #
-# Name: v$thread
+# Name: v$threads
 # Author: YJ
 # Date: 2016.06.27
 # MariaDB에 있는 쓰레드 현황 보기
@@ -8,7 +8,7 @@ CREATE OR REPLACE
 ALGORITHM=TEMPTABLE
 DEFINER = 'root'@'localhost'
 SQL SECURITY INVOKER
-VIEW sys.`v$thread`
+VIEW sys.`v$threads`
 AS
 SELECT p.id AS thread_id
       ,concat('`', p.user, '`@`', substring_index(p.host, ':', 1), '`') AS user
