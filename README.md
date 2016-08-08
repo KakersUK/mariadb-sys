@@ -1,4 +1,4 @@
-# The Author remarks
+# The Author remarks (저자의 말)
 
 This schema was written by getting an idea from The MySQL sys schema (https://github.com/mysql/mysql-sys).
 
@@ -42,7 +42,5 @@ SOURCE ./mariadb_sys_install.sql
 ```
 
 ## Overview of objects (객체개요)
-
----
 
 to be continue...
