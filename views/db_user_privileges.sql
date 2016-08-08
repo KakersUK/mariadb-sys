@@ -2,13 +2,23 @@
 # Name: db_user_privilegs
 # Author: YJ
 # Date: 2016.07.19
-# Desc: user privileges list
+# Desc: show list of user's privileges
+#
+# MariaDB [sys]> select * from db_user_privileges;
+# +---------------+--------------+---------------------------+------------+--------------------+----------------+--------------+
+# | table_catalog | table_schema | table_name                | table_type | grantee            | privilege_type | is_grantable |
+# +---------------+--------------+---------------------------+------------+--------------------+----------------+--------------+
+# | def           | sys          | db_all_objects            | VIEW       | 'root'@'localhost' | SELECT         | YES          |
+# | def           | sys          | db_user_privileges        | VIEW       | 'root'@'localhost' | SELECT         | YES          |
+# ...
+# | def           | sys          | v$threads                 | VIEW       | 'root'@'localhost' | SELECT         | YES          |
+# +---------------+--------------+---------------------------+------------+--------------------+----------------+--------------+
 #
 CREATE OR REPLACE
 ALGORITHM=UNDEFINED
 DEFINER = 'root'@'localhost'
 SQL SECURITY INVOKER
-VIEW sys.`db_user_privileges`
+VIEW `db_user_privileges`
 AS
 SELECT t.table_catalog
       ,t.table_schema
