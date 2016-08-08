@@ -2,13 +2,22 @@
 # Name: v$threads
 # Author: YJ
 # Date: 2016.06.27
-# MariaDB에 있는 쓰레드 현황 보기
-# 
+# Desc: show current all threads
+#
+# MariaDB [sys]> select * from v$threads;
+# +-----------+-------------------------------+-------------+---------------+------------+-------------+-----------------------------+-------------------------+---------------+--------+-------------------+---------------+------------+------------+-----------+
+# | thread_id | user                          | schema_name | thread_status | thread_sec | memory_used | thread_state                | thread_info             | trx_existence | trx_id | trx_rows_modified | lock_wait_sec | lock_table | lock_index | lock_type |
+# +-----------+-------------------------------+-------------+---------------+------------+-------------+-----------------------------+-------------------------+---------------+--------+-------------------+---------------+------------+------------+-----------+
+# |       368 | `root`@`localhost`            | sys         | Query         |          0 |      844672 | Filling schema table        | select * from v$threads | NO            | NULL   |              NULL |          NULL | NULL       | NULL       | NULL      |
+# ...
+# |         2 | `event_scheduler`@`localhost` | NULL        | Daemon        |        149 |       44280 | Waiting for next activation | NULL                    | NO            | NULL   |              NULL |          NULL | NULL       | NULL       | NULL      |
+# +-----------+-------------------------------+-------------+---------------+------------+-------------+-----------------------------+-------------------------+---------------+--------+-------------------+---------------+------------+------------+-----------+
+#
 CREATE OR REPLACE
 ALGORITHM=UNDEFINED 
 DEFINER = 'root'@'localhost'
 SQL SECURITY INVOKER
-VIEW sys.`v$threads`
+VIEW `v$threads`
 AS
 SELECT p.id AS thread_id
       ,concat('`', p.user, '`@`', substring_index(p.host, ':', 1), '`') AS user
