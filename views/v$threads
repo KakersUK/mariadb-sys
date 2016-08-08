@@ -25,14 +25,6 @@ SELECT p.id AS thread_id
       ,locks.lock_table
       ,locks.lock_index
       ,locks.lock_type
-      ,(SELECT group_concat(concat(table_schema
-                                       ,'.'
-                                       ,table_name
-                                       ,'('
-                                       ,REPLACE(lock_type, ' metadata lock', '')
-                                       ,')') separator ',')
-          FROM information_schema.metadata_lock_info meta
-         WHERE meta.thread_id = trx.trx_mysql_thread_id) AS meta_locks
   FROM information_schema.processlist p
   LEFT JOIN information_schema.innodb_trx trx
     ON p.id = trx.trx_mysql_thread_id
