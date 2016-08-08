@@ -1,15 +1,23 @@
 #
+# require plugin "metadata_lock_info"
+#
 # Name: v$meta_lock
 # Author: YJ
 # Date: 2016.06.27
-# 선수조건: INSTALL SONAME 'metadata_lock_info';
-# MariaDB에 있는 meta lock 현황보기
-# 
+# Desc: show current metadata lock info
+#
+# MariaDB [sys]> select * from v$meta_lock;
+# +-------------+-------------------+-----------------+------------------+--------------------+-----------+--------------------+---------------+-----------------+---------------------------+-------------+
+# | schema_name | object_name       | meta_lock_type  | meta_lock_mode   | meta_lock_duration | thread_id | user               | thread_status | thread_time_sec | thread_info               | kill_thread |
+# +-------------+-------------------+-----------------+------------------+--------------------+-----------+--------------------+---------------+-----------------+---------------------------+-------------+
+# | sys         | v$meta_lock       | Table           | MDL_SHARED_READ  | MDL_TRANSACTION    |    303860 | root@localhost     | Query         |               0 | select * from v$meta_lock | KILL 303860 |
+# +-------------+-------------------+-----------------+------------------+--------------------+-----------+--------------------+---------------+-----------------+---------------------------+-------------+
+#
 CREATE OR REPLACE
 ALGORITHM=UNDEFINED 
 DEFINER = 'root'@'localhost'
 SQL SECURITY INVOKER
-VIEW sys.`v$meta_lock`
+VIEW `v$meta_lock`
 AS
 SELECT meta.table_schema AS schema_name
       ,meta.table_name AS object_name
