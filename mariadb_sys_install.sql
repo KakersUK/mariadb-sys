@@ -10,7 +10,7 @@ USE sys;
 
 SOURCE ./views/v_threads.sql
 SOURCE ./views/v_innodb_lock.sql
-SOURCE ./views/v_db_checks.sql
+SOURCE ./views/v_db_health_check.sql
 SOURCE ./views/v_global_status_kr.sql
 SOURCE ./views/db_all_objects.sql
 SOURCE ./views/db_user_privileges.sql
