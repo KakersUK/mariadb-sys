@@ -1,7 +1,5 @@
 # The Author remarks
 
----
-
 This schema was written by getting an idea from The MySQL sys schema (https://github.com/mysql/mysql-sys).
 
 But all scripts have been written by myself, it did not use The MySQL sys schema.
@@ -9,8 +7,6 @@ But all scripts have been written by myself, it did not use The MySQL sys schema
 이 스키마는 MySQL sys 에서 아이디어를 얻어서 작성됐지만, 모두 제가 직접 작성한 것 입니다.
 
 # The MariaDB sys schema
-
----
 
 A collection of views to help MariaDB administrators get insight in to MariaDB Database usage.
 
@@ -25,8 +21,6 @@ The most of views are for any users, but the views of the suffix "_kr" are only 
 접미어가 "_kr"인 뷰는 한국인만을 위한 뷰입니다.
 
 ## Installation (설치)
-
----
 
 The objects should all be created as the root user (but run with the privileges of the invoker).
 
