@@ -6,7 +6,7 @@
 # MariaDB에 있는 meta lock 현황보기
 # 
 CREATE OR REPLACE
-ALGORITHM=TEMPTABLE
+ALGORITHM=UNDEFINED 
 DEFINER = 'root'@'localhost'
 SQL SECURITY INVOKER
 VIEW sys.`v$meta_lock`
