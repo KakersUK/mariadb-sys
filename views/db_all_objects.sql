@@ -4,7 +4,7 @@
 # Date: 2016.08.08
 # Desc: show list of objects within each schema
 #
-# mysql> select * from db_all_objects;# 
+# MariaDB [sys]> select * from db_all_objects;# 
 # +--------------------+-------------+---------------------------------------+
 # | schema_name        | object_type | object_name                           |
 # +--------------------+-------------+---------------------------------------+
