@@ -1,10 +1,10 @@
 #
-# Name: db_objects
+# Name: db_all_objects
 # Author: YJ
 # Date: 2016.08.08
 # Desc: show list of objects within each schema
 #
-# mysql> select * from sys.db_objects;# 
+# mysql> select * from sys.db_all_objects;# 
 # +--------------------+-------------+---------------------------------------+
 # | schema_name        | object_type | object_name                           |
 # +--------------------+-------------+---------------------------------------+
@@ -20,7 +20,7 @@ CREATE OR REPLACE
 ALGORITHM=UNDEFINED
 DEFINER = 'root'@'localhost'
 SQL SECURITY INVOKER
-VIEW sys.`db_objects`
+VIEW sys.`db_all_objects`
 AS
 SELECT table_schema AS schema_name
       ,table_type   AS object_type
