@@ -1,15 +1,27 @@
 #
+# Only for Korean
+#
 # Name: v$global_status_kr
 # Author: YJ
-# Date: 2016.06.27
-# information_schema.global_status 시스템뷰에 한국어 설명을 포함시킨 뷰
+# Date: 2016.08.08
+# Desc: information_schema.global_status 시스템뷰에 한국어 설명을 덧붙여서 보여줌
 # 
-
+# MariaDB [sys]> select * from v$global_status_kr;
+# +-------------------+----------------+------------------------------------------------------------------------------+
+# | variable_name     | variable_value | variable_desc_kr                                                             |
+# +-------------------+----------------+------------------------------------------------------------------------------+
+# | ABORTED_CLIENTS   | 69             | 연결을 닫지 않고 클라이언트가 죽어서 중지된 연결의 수                        |
+# | ABORTED_CONNECTS  | 303382         | MySQL 서버에 연결 실패한 횟수                                                |
+# ...
+# | COM_INSERT_SELECT | 22305          | INSERT ... SELECT ... 쿼리 실행횟수                                          |
+# | COM_LOAD          | 0              | LOAD 쿼리 실행횟수                                                           |
+# +-------------------+----------------+------------------------------------------------------------------------------+
+#
 CREATE OR REPLACE
 ALGORITHM=UNDEFINED 
 DEFINER = 'root'@'localhost'
 SQL SECURITY INVOKER
-VIEW sys.`v$global_status_kr`
+VIEW `v$global_status_kr`
 AS
 SELECT variable_name,
        variable_value,
