@@ -5,7 +5,7 @@
 # MariaDB에 있는 쓰레드 현황 보기
 # 
 CREATE OR REPLACE
-ALGORITHM=TEMPTABLE
+ALGORITHM=UNDEFINED 
 DEFINER = 'root'@'localhost'
 SQL SECURITY INVOKER
 VIEW sys.`v$threads`
