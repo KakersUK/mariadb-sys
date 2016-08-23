@@ -319,9 +319,11 @@ MariaDB [sys]> select * from v$threads;
 
 오브젝트들은 root 사용자로 생성되어야 합니다. (단, 실행할 때는 invoker 권한을 사용합니다.)
 
-설치 방법은 Installation 부분을 참고합니다.
+설치 방법은 영문설명의 Installation 부분을 참고합니다.
 
 ## 오브젝트 개요
+
+각 오브젝트의 구조 및 샘플은 상단의 영문 설명을 참고 하십시오.
 
 ### db_all_objects
 
@@ -329,15 +331,11 @@ MariaDB [sys]> select * from v$threads;
 
 DB에 있는 모든 오브젝트 목록
 
-구조 및 샘플은 상단의 영문 설명을 참고 하십시오.
-
 ### db_user_privileges
 
 #### 설명
 
 모든 사용자의 권한 현황
-
-구조 및 샘플은 상단의 영문 설명을 참고 하십시오.
 
 ### v$db_health_check
 
@@ -345,15 +343,11 @@ DB에 있는 모든 오브젝트 목록
 
 MariaDB 주요 헬스체크
 
-구조 및 샘플은 상단의 영문 설명을 참고 하십시오.
-
 ### v$global_status_kr
 
 #### 설명
 
 information_schema.global_status와 동일한데, 한국어 설명을 추가한 것입니다.
-
-구조 및 샘플은 상단의 영문 설명을 참고 하십시오.
 
 ### v$innodb_lock ★
 
@@ -365,20 +359,14 @@ InnoDB에 있는 row level lock 현황
 
 만약 최상위 잠금을 죽이고, 다음 최상위 잠금이 holder로 바뀝니다.
 
-구조 및 샘플은 상단의 영문 설명을 참고 하십시오.
-
 ### v$meta_lock ★
 
 #### 설명
 
 메타데이터 잠금 현황
 
-구조 및 샘플은 상단의 영문 설명을 참고 하십시오.
-
 ### v$threads ★
 
 #### 설명
 
 모든 쓰레드 현황
-
-구조 및 샘플은 상단의 영문 설명을 참고 하십시오.
