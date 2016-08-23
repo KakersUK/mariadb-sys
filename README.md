@@ -1,6 +1,6 @@
 # The MariaDB sys schema
 
-## Remark
+## Comment
 
 This schema was written by getting an idea from The MySQL sys schema (https://github.com/mysql/mysql-sys).
 
