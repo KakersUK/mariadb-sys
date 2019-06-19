@@ -7,14 +7,14 @@
 # Desc: database health check 
 # 
 # MariaDB [sys]> select * from v$db_health_check;
-# +-----------------+-------------------------------+-----------------+----------+---------------------------------------------------------+
-# | category        | division                      | current_percent | state    | description_kr                                          |
-# +-----------------+-------------------------------+-----------------+----------+---------------------------------------------------------+
-# | Connection      | Refued Connection             |            99.8 | Critical | 연결 실패 비율                                          |
-# | Connection      | Connection Usage              |            44.8 | NULL     | 동시 접속이 가능한 최대 수치 대비 연결된 Thread의 비율  |
+# +-----------------+-------------------------------+-----------------+----------+
+# | category        | division                      | current_percent | state    |
+# +-----------------+-------------------------------+-----------------+----------+
+# | Connection      | Refued Connection             |            99.8 | Critical |
+# | Connection      | Connection Usage              |            44.8 | NULL     |
 # ...
-# | Open Files      | Open Files Ratio              |             0.2 | NULL     | 파일 오픈 비율                                          |
-# +-----------------+-------------------------------+-----------------+----------+---------------------------------------------------------+
+# | Open Files      | Open Files Ratio              |             0.2 | NULL     |
+# +-----------------+-------------------------------+-----------------+----------+
 #
 CREATE OR REPLACE
 ALGORITHM=UNDEFINED
@@ -37,7 +37,6 @@ SELECT 'Connection' AS category
             ) > 80
        THEN 'Critical'
        END AS state
-      ,'연결 실패 비율' AS description_kr
   FROM information_schema.global_status
  WHERE variable_name IN ('ABORTED_CONNECTS', 'CONNECTIONS')
 UNION ALL
@@ -49,7 +48,6 @@ SELECT 'Connection' AS category
             ) > 90
        THEN 'Warning'
        END AS state
-      ,'동시 접속이 가능한 최대 수치 대비 연결된 Thread의 비율' AS description_kr
   FROM information_schema.global_status s, information_schema.global_variables v
  WHERE s.variable_name IN ('THREADS_CONNECTED')
    AND v.variable_name IN ('MAX_CONNECTIONS')
@@ -62,7 +60,6 @@ SELECT 'Connection' AS category
             ) > 90
        THEN 'Warning'
        END AS state
-      ,'동시 접속이 가능한 최대 수치 대비 가장 많이 접속이 사용됐던 비율' AS description_kr
   FROM information_schema.global_status s, information_schema.global_variables v
  WHERE s.variable_name IN ('MAX_USED_CONNECTIONS')
    AND v.variable_name IN ('MAX_CONNECTIONS')
@@ -94,7 +91,6 @@ SELECT 'Index' AS category
             ) > 40
        THEN 'Critical'
        END AS state
-      ,'Table Full scan을 통해 Aaccess한 Row의 비율' AS description_kr
   FROM information_schema.global_status
  WHERE variable_name IN ('HANDLER_READ_RND', 'HANDLER_READ_KEY', 'HANDLER_READ_FIRST', 'HANDLER_READ_RND_NEXT', 'HANDLER_READ_PREV')
 UNION ALL
@@ -113,7 +109,6 @@ SELECT 'Temporary Table' AS category
             ) > 75
        THEN 'Critical'
        END AS state
-      ,'임시테이블이 물리적 Disk에 생성된 비율' AS description_kr
   FROM information_schema.global_status
  WHERE variable_name IN ('CREATED_TMP_DISK_TABLES', 'CREATED_TMP_TABLES')
 UNION ALL
@@ -132,7 +127,6 @@ SELECT 'Table Locks' AS category
             ) > 60
        THEN 'Critical'
        END AS state
-      ,'테이블 잠금 경합' AS description_kr
   FROM information_schema.global_status
  WHERE variable_name IN ('TABLE_LOCKS_WAITED', 'TABLE_LOCKS_IMMEDIATE')
 UNION ALL
@@ -151,7 +145,6 @@ SELECT 'InnoDB Cache' AS category
             ) > 10
        THEN 'Critical'
        END AS state
-      ,'InnoDB Buffer pool 작성전에 대기하는 비율' AS description_kr
   FROM information_schema.global_status
  WHERE variable_name IN ('INNODB_BUFFER_POOL_WAIT_FREE', 'INNODB_BUFFER_POOL_WRITE_REQUESTS')
 UNION ALL
@@ -179,7 +172,6 @@ SELECT 'Key Cache' AS category
             ) < 90
        THEN 'Warning'
        END AS state
-      ,'Key Cache 사용율' AS description_kr
   FROM information_schema.global_status
  WHERE variable_name IN ('KEY_READS', 'KEY_READ_REQUESTS')
 UNION ALL
@@ -201,7 +193,6 @@ SELECT 'Query Cache' AS category
             ) > 80
        THEN 'Warning'
        END AS state
-      ,'Query Cache 사용율 (25%미만: query_cache_size 축소 권장, 80%초과: Qcache_lowmem_prunes가 50을 초과하면 query_cache_size 증가 권장)' AS description_kr
   FROM information_schema.global_status
  WHERE variable_name IN ('Qcache_free_blocks', 'Qcache_total_blocks')
 UNION ALL
@@ -216,7 +207,6 @@ SELECT 'Open Table' AS category
             ) < 85
        THEN 'Warning'
        END AS state
-      ,'오픈된 적이 있는 테이블 중에 현재 오픈 돼 있는 테이블 비율' AS description_kr
   FROM information_schema.global_status
  WHERE variable_name IN ('OPEN_TABLES', 'OPENED_TABLES')
 UNION ALL
@@ -228,7 +218,6 @@ SELECT 'Open Table' AS category
             ) > 95
        THEN 'Warning'
        END AS state
-      ,'테이블 오픈 캐시 이용율' AS description_kr
   FROM information_schema.global_status s, information_schema.global_variables v
  WHERE s.variable_name IN ('OPEN_TABLES')
    AND v.variable_name IN ('TABLE_OPEN_CACHE')
@@ -241,7 +230,6 @@ SELECT 'Open Files' AS category
             ) > 75
        THEN 'Warning'
        END AS state
-      ,'파일 오픈 비율' AS description_kr
   FROM information_schema.global_status s, information_schema.global_variables v
  WHERE s.variable_name IN ('OPEN_FILES')
    AND v.variable_name IN ('OPEN_FILES_LIMIT')
