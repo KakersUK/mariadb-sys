@@ -10,10 +10,6 @@ A collection of views to help MariaDB administrators get insight in to MariaDB D
 
 There are install files available for over MariaDB 10.0.x. To load these, you must position yourself within the directory that you downloaded to.
 
-* Caution
-
-The most of views are for any users, but the views of the suffix "_kr" are only for Korean users. 
-
 ## Installation
 
 The objects should all be created as the root user (but run with the privileges of the invoker).
@@ -113,7 +109,6 @@ MariaDB [sys]> select * from db_user_privileges;
 
 MariaDB health check - Key Item
 
-This view for everyone but the "description_kr" is only for Korean.
 
 #### Structures
 
@@ -126,7 +121,6 @@ MariaDB [(none)]> desc sys.v$db_health_check;
 | division        | varchar(29)  | NO   |     |         |       |
 | current_percent | double(18,1) | YES  |     | NULL    |       |
 | state           | varchar(8)   | YES  |     | NULL    |       |
-| description_kr  | varchar(109) | NO   |     |         |       |
 +-----------------+--------------+------+-----+---------+-------+
 ```
 
@@ -134,48 +128,14 @@ MariaDB [(none)]> desc sys.v$db_health_check;
 
 ```
 MariaDB [sys]> select * from v$db_health_check;
-+-----------------+-------------------------------+-----------------+----------+---------------------------------------------------------+
-| category        | division                      | current_percent | state    | description_kr                                          |
-+-----------------+-------------------------------+-----------------+----------+---------------------------------------------------------+
-| Connection      | Refued Connection             |            99.8 | Critical | 연결 실패 비율                                          |
-| Connection      | Connection Usage              |            44.8 | NULL     | 동시 접속이 가능한 최대 수치 대비 연결된 Thread의 비율  |
++-----------------+-------------------------------+-----------------+----------+
+| category        | division                      | current_percent | state    |
++-----------------+-------------------------------+-----------------+----------+
+| Connection      | Refued Connection             |            99.8 | Critical |
+| Connection      | Connection Usage              |            44.8 | NULL     |
 ...
-| Open Files      | Open Files Ratio              |             0.2 | NULL     | 파일 오픈 비율                                          |
-+-----------------+-------------------------------+-----------------+----------+---------------------------------------------------------+
-```
-
-### v$global_status_kr
-
-#### Description
-
-Same as information_schema.global_status but include Korean description.
-
-#### Structures
-
-```
-MariaDB [(none)]> desc sys.v$global_status_kr;
-+------------------+---------------+------+-----+---------+-------+
-| Field            | Type          | Null | Key | Default | Extra |
-+------------------+---------------+------+-----+---------+-------+
-| variable_name    | varchar(64)   | NO   |     |         |       |
-| variable_value   | varchar(1024) | YES  |     | NULL    |       |
-| variable_desc_kr | varchar(131)  | YES  |     | NULL    |       |
-+------------------+---------------+------+-----+---------+-------+
-```
-
-#### Example
-
-```
-MariaDB [sys]> select * from v$global_status_kr;
-+-------------------+----------------+------------------------------------------------------------------------------+
-| variable_name     | variable_value | variable_desc_kr                                                             |
-+-------------------+----------------+------------------------------------------------------------------------------+
-| ABORTED_CLIENTS   | 69             | 연결을 닫지 않고 클라이언트가 죽어서 중지된 연결의 수                        |
-| ABORTED_CONNECTS  | 303382         | MySQL 서버에 연결 실패한 횟수                                                |
-...
-| COM_INSERT_SELECT | 22305          | INSERT ... SELECT ... 쿼리 실행횟수                                          |
-| COM_LOAD          | 0              | LOAD 쿼리 실행횟수                                                           |
-+-------------------+----------------+------------------------------------------------------------------------------+
+| Open Files      | Open Files Ratio              |             0.2 | NULL     |
++-----------------+-------------------------------+-----------------+----------+
 ```
 
 ### v$innodb_lock ★
