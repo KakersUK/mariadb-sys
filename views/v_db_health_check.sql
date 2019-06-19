@@ -1,6 +1,4 @@
 #
-# View for everyone. but field "description_kr" is only for Korean.
-#
 # Name: v$db_health_check
 # Author: YJ
 # Date: 2016.08.08
@@ -155,7 +153,6 @@ SELECT 'InnoDB Cache' AS category
              MAX(IF(variable_name = 'INNODB_BUFFER_POOL_READ_REQUESTS', variable_value, 0)) * 100
             ,1) AS current_percent
       ,NULL AS state
-      ,'InnoDB Buffer pool 에서 읽어 오는 비율' AS description_kr
   FROM information_schema.global_status
  WHERE variable_name IN ('INNODB_BUFFER_POOL_READS', 'INNODB_BUFFER_POOL_READ_REQUESTS')
 UNION ALL
